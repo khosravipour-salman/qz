@@ -35,4 +35,3 @@ def match_password(password, confirm_password):
     if confirm_password == password:
         return True
     print('Passwords does not match.')
-

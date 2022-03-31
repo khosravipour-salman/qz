@@ -5,6 +5,7 @@ from validators import (
     validate_city,
     validate_email,
 )
+from stdiomask import getpass
 
 
 def get_login_data():
@@ -14,7 +15,7 @@ def get_login_data():
             print('Empty username is not allowed')
             continue
 
-        password = input('Enter your password: ')
+        password = getpass('Enter your password: ')
         if not password:
             print('Empty password is not allowed')
             continue
@@ -29,10 +30,10 @@ def get_register_data():
         username = input('Enter your username: ')
         if not validate_username(username): continue
 
-        password = input('Enter your password: ')
+        password = getpass('Enter your password: ')
         if not validate_password(password): continue
 
-        confirm_password = input('Confirm your password: ')
+        confirm_password = getpass('Confirm your password: ')
         if not match_password(password, confirm_password): continue
 
         fname = input('Enter your first name: ')

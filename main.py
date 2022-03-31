@@ -5,24 +5,26 @@ from users import (
     get_user_by_username,
     show_users_list,
 )
+from colored_text import colored_print
 
 # c case
 # colorize commands
-
+#
 try:
     while True:
         try:
-            user_command = input('Enter 0 for Login; Enter 1 for Register; (0/1): ')
+            colored_print('Enter 0 for Login; Enter 1 for Register; (0/1): ', 'message', br=False)
+            user_command = input()
 
             if user_command == '0':
-                user_info = get_login_data()
                 while True:
+                    user_info = get_login_data()
                     if login(*user_info):
                         break
 
                 while True:
-                    whats_next = input(
-                        'Enter "info" for your full account information; "list" for user list; ( info/list ): ')
+                    colored_print('Enter "info" for your full account information; "list" for user list; ( info/list ): ', 'message', br=False)
+                    whats_next = input()
 
                     if whats_next == 'info':
                         show_user_info(user_info[0])
@@ -41,8 +43,8 @@ try:
                 raise ValueError(f'\n"{user_command}" is not recognized as an internal command.\n')
 
         except ValueError as e:
-            print(e)
+            colored_print(e, 'warning')
 
 except KeyboardInterrupt:
-    print('\nBye :) ')
+    colored_print('\nBye :) ', 'success')
     exit()

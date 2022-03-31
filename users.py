@@ -1,5 +1,5 @@
-from tabulate import tabulate
 from prettytable import PrettyTable
+import bcrypt
 
 
 def get_users():
@@ -25,28 +25,23 @@ def get_user_by_username(username):
 
 def add_user_to_file(username, password, fname, lname, city, email):
     handler = open('users.txt', 'a')
-    handler.write(f'{username}??{password}??{fname}??{lname}??{city}??{email}@@@')
+
+    password_in_bytes = bytes(password, 'utf-8')
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password_in_bytes, salt)
+
+    handler.write(f'{username}??{hashed_password.decode("utf-8")}??{fname}??{lname}??{city}??{email}@@@')
     handler.close()
 
 
 def show_user_info(username):
     user = get_user_by_username(username)
-    print(
-        '\n',
-        tabulate(
-            [
-                [
-                    username,
-                    *user.values(),
-                ],
-            ],
-            headers=[
-                'Username', 'Password',
-                'First name', 'Last name',
-                'Email', 'City',
-            ]
-        ), '\n'
-    )
+
+    print('Username: ', username)
+    for key, value in user.items():
+        print(f'{key.capitalize()} : {value}')
+    else:
+        print('')
 
 
 def show_users_list():

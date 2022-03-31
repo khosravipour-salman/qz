@@ -1,8 +1,9 @@
-# from users import users_list, add_user_to_file, get_user_by_username
+import bcrypt
 from users import add_user_to_file
 from logger import log_user_register
 from datetime import datetime
 from users import get_user_by_username, get_users
+from colored_text import colored_print
 
 
 def register(username, password, fname, lname, city, email):
@@ -12,13 +13,15 @@ def register(username, password, fname, lname, city, email):
 
 def login(username, password):
     users = get_users()
+    if not users.get(username):
+        colored_print(f'"{username}" does not exist!', 'warning')
+        return None
+
+    user_password = bytes(users.get(username).get('password'), 'utf-8')
 
     if username in users:
-        if password == users[username]['password']:
-            print(f'Logged in successfully. ')
+        if bcrypt.checkpw(bytes(password, 'utf-8'), user_password):
+            colored_print(f'\n{username} Logged in successfully. ', 'success')
             return True
 
-        print('Invalid credentials. ')
-
-
-# fix while loop bug
+        colored_print('\nInvalid credentials. ', 'warning')
