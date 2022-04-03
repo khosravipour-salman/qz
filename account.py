@@ -1,14 +1,13 @@
 import bcrypt
 from users import add_user_to_file
 from logger import log_user_register
-from datetime import datetime
 from users import get_user_by_username, get_users
 from colored_text import colored_print
 
 
 def register(username, password, fname, lname, city, email):
     add_user_to_file(username, password, fname, lname, city, email)
-    log_user_register(username, datetime.now().replace(microsecond=0))
+    log_user_register(username)
 
 
 def login(username, password):

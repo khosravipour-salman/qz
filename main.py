@@ -6,10 +6,10 @@ from users import (
     show_users_list,
 )
 from colored_text import colored_print
+from logger import log_user_score
+from quiz import ask_questions
 
-# c case
-# colorize commands
-#
+
 try:
     while True:
         try:
@@ -23,7 +23,7 @@ try:
                         break
 
                 while True:
-                    colored_print('Enter "info" for your full account information; "list" for user list; ( info/list ): ', 'message', br=False)
+                    colored_print('Enter "info" for your full account information; "list" for user list; "quiz" for quiz; ( info/list/quiz ): ', 'message', br=False)
                     whats_next = input()
 
                     if whats_next == 'info':
@@ -31,6 +31,10 @@ try:
 
                     elif whats_next == 'list':
                         show_users_list()
+
+                    elif whats_next == 'quiz':
+                        user_score = ask_questions()
+                        log_user_score(user_info[0], user_score)
 
                     else:
                         raise ValueError(f'\n"{user_command}" is not recognized as an internal command.\n')

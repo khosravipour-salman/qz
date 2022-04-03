@@ -7,6 +7,7 @@ def colored_print(text, mode, br=True):
     WARNING = 'red'
     SUCCESS = 'green'
     MESSAGE = 'blue'
+    CYAN = 'cyan'
 
     if mode == 'warning':
         if br:
@@ -26,5 +27,11 @@ def colored_print(text, mode, br=True):
         else:
             cprint(text, MESSAGE, end='')
 
+    elif mode == 'cyan':
+        if br:
+            cprint(text, CYAN)
+        else:
+            cprint(text, CYAN, end='')
+            
     else:
         cprint('Invalid color mode!', WARNING)
