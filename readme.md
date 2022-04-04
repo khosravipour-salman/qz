@@ -6,7 +6,7 @@
 
 | Packages            | Version      |
 | ---------------     | -----------  |
-| bcrypt              | 3.2.0        |
+| bcrypt| 3.2.0        |
 | colorama            | 0.4.4        |
 | prettytable         | 2.5.0        |
 | termcolor           | 1.1.0        |
