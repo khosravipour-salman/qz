@@ -34,6 +34,7 @@ try:
 
                     elif whats_next == 'quiz':
                         user_score = ask_questions()
+                        # here
                         log_user_score(user_info[0], user_score)
 
                     else:

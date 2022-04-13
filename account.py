@@ -7,11 +7,14 @@ from colored_text import colored_print
 
 def register(username, password, fname, lname, city, email):
     add_user_to_file(username, password, fname, lname, city, email)
+    # change add_user_to_file to insert_user_info_to_db
+    # here
     log_user_register(username)
 
 
 def login(username, password):
     users = get_users()
+    # here
     if not users.get(username):
         colored_print(f'"{username}" does not exist!', 'warning')
         return None
@@ -24,3 +27,4 @@ def login(username, password):
             return True
 
         colored_print('\nInvalid credentials. ', 'warning')
+ 
